@@ -59,3 +59,39 @@ body { background: #fff; }
   background: #1c983a;
   border-color: #187f31;
 }
+
+
+.attachments-box {
+  border: 2px solid #cfcfcf;
+  border-radius: 10px;
+  padding: 12px;
+  background: #fff;
+  margin-bottom: 16px;
+}
+.attachments-header {
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+.attachment-row {
+  display: flex;
+  align-items: center;
+  border: 2px solid #e5e5e5;
+  border-radius: 8px;
+  padding: 10px;
+  margin-bottom: 10px;
+  background: #fff;
+}
+.attachment-actions {
+  display: flex;
+  gap: 8px;
+  margin-right: 12px;
+}
+.attachment-name {
+  flex: 1;
+  line-height: 22px;
+}
+.attachments-add,
+.save-form {
+  border-radius: 8px;
+  font-weight: 600;
+}
