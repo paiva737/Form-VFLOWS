@@ -1,4 +1,3 @@
-
 $(function () {
-  console.log("App iniciado");
-});
+  console.log("App iniciado")
+})

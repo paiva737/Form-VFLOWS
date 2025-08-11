@@ -1,2 +1,21 @@
 * { box-sizing: border-box; }
 body { background: #fff; }
+
+.form-title { margin: 20px 0; font-weight: 600; }
+.panel-block {
+  border: 2px solid #cfcfcf;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  background: #fff;
+}
+.panel-block__bar {
+  background: #0d8ab5;
+  color: #fff;
+  font-weight: 600;
+  padding: 10px 14px;
+}
+.panel-block__body {
+  padding: 16px;
+}
+.form-group label { font-weight: 600; }
+.form-control { border-radius: 8px; height: 38px; }
