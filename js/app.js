@@ -20,4 +20,18 @@ $(function () {
       }
     })
   })
+
+  function recalc($item){
+    const q = parseFloat($item.find('.qtd').val()||'0')
+    const v = parseFloat($item.find('.vu').val()||'0')
+    const t = (q*v).toFixed(2)
+    $item.find('.vt').val(t)
+  }
+
+  $(document).on('input','.product-item .qtd, .product-item .vu',function(){
+    const $item = $(this).closest('.product-item')
+    recalc($item)
+  })
+
+  $('.product-item').each(function(){ recalc($(this)) })
 })
