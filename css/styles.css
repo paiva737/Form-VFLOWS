@@ -194,6 +194,30 @@ body { background: #fff; }
   padding-right: 16px;
 }
 
+.loading-overlay{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.35);
+  display:none;
+  align-items:center;
+  justify-content:center;
+  z-index:1050;
+}
+.loading-overlay.is-open{ display:flex; }
+.loading-card{
+  background:#fff;
+  border-radius:8px;
+  padding:16px 20px;
+  min-width:260px;
+  box-shadow:0 6px 18px rgba(0,0,0,.2);
+}
+.loading-text{
+  text-align:center;
+  margin-bottom:10px;
+  font-weight:600;
+}
+
+
 .product-box-icon{
   display:inline-block;
   width:46px;
@@ -210,3 +234,4 @@ body { background: #fff; }
 </svg>");
 }
 .attachment-actions .btn i { font-size: 12px; line-height: 1; }
+

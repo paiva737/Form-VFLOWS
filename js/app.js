@@ -87,17 +87,15 @@ $(function () {
   const ATT_KEY='vflows_anexos'
   function getAnexos(){const r=sessionStorage.getItem(ATT_KEY);return r?JSON.parse(r):[]}
   function setAnexos(a){sessionStorage.setItem(ATT_KEY,JSON.stringify(a))}
-function rowHTML(a){
-  return '<div class="attachment-row" data-id="'+a.id+'">'+
-    '<div class="attachment-actions">'+
-      '<button type="button" class="btn btn-danger btn-xs attachment-btn" data-act="del"><i class="fluigicon fluigicon-trash"></i></button>'+
-      '<button type="button" class="btn btn-info btn-xs attachment-btn" data-act="view"><i class="fluigicon fluigicon-eye-open"></i></button>'+
-    '</div>'+
-    '<div class="attachment-name">'+a.nome+'</div>'+
-  '</div>';
-}
-
-
+  function rowHTML(a){
+    return '<div class="attachment-row" data-id="'+a.id+'">'+
+      '<div class="attachment-actions">'+
+        '<button type="button" class="btn btn-danger btn-xs attachment-btn" data-act="del"><i class="fluigicon fluigicon-trash"></i></button>'+
+        '<button type="button" class="btn btn-info btn-xs attachment-btn" data-act="view"><i class="fluigicon fluigicon-eye-open"></i></button>'+
+      '</div>'+
+      '<div class="attachment-name">'+a.nome+'</div>'+
+    '</div>';
+  }
 
   function renderAnexos(){
     const items=getAnexos()
@@ -146,7 +144,6 @@ function rowHTML(a){
   function validarProdutos(){
     const $itens = $('.product-item')
     if($itens.length===0) return {ok:false,msg:'Inclua ao menos 1 produto.'}
-
     for(let i=0;i<$itens.length;i++){
       const $p = $($itens[i])
       const idx = i+1
@@ -154,7 +151,6 @@ function rowHTML(a){
       const $un   = $p.find('.un')
       const $qtd  = $p.find('.qtd')
       const $vu   = $p.find('.vu')
-
       if(!$desc.val() || !$desc.val().trim()){
         $desc.focus(); return {ok:false,msg:'Preencha a descrição do Produto - '+idx}
       }
@@ -200,17 +196,27 @@ function rowHTML(a){
     a.remove()
   }
 
+  function limparDepoisSalvar(){
+    $('#form-fornecedor')[0].reset()
+    $('.product-item').not(':first').remove()
+    const $p=$('.product-item').first()
+    $p.find('input').val('')
+    $p.find('select').prop('selectedIndex',0)
+    $p.find('.vt').val('0.00')
+    renumerar()
+    sessionStorage.removeItem(ATT_KEY)
+    renderAnexos()
+  }
+
   $('.save-form').on('click',function(){
     const temAnexo=getAnexos().length>0
     if(!temAnexo){alert('Inclua ao menos 1 anexo.');return}
-
     const vp = validarProdutos()
     if(!vp.ok){ alert(vp.msg); return }
-
     const formOK=document.getElementById('form-fornecedor').checkValidity()
     if(!formOK){ document.getElementById('form-fornecedor').reportValidity(); return }
 
-    $('#modalLoading').modal('show')
+    $('#loadingOverlay').addClass('is-open')
 
     const payload={
       fornecedor:{
@@ -241,9 +247,9 @@ function rowHTML(a){
     setTimeout(function(){
       console.log('JSON DE ENVIO:',payload)
       baixarJSON(payload,'fornecedor_'+Date.now()+'.json')
-      $('#modalLoading').modal('hide')
+      $('#loadingOverlay').removeClass('is-open')
+      limparDepoisSalvar()
       alert('Dados preparados com sucesso.')
     },700)
   })
 })
-
