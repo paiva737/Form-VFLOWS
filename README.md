@@ -37,7 +37,7 @@ Formulário para cadastro de **Fornecedor**, **Produtos** e **Anexos** com:
 - Cálculo automático do **Valor Total** do produto  
 - Validações de campos  
 - Armazenamento de anexos em memória (base64)  
-- Geração e **download do JSON** (também logado no console)
+- Geração e **download do JSON** 
 
 ## ▶️ Como executar
 - **Rápido:** abra `index.html` direto no navegador.  
@@ -56,3 +56,59 @@ Formulário para cadastro de **Fornecedor**, **Produtos** e **Anexos** com:
 > O desafio permite **baixar** ou **apenas exibir** o JSON no console.
 
 ## 📁 Estrutura
+
+├─ index.html
+├─ css/
+│ └─ styles.css
+├─ js/
+│ └─ app.js
+└─ docs/
+├─ preview-desktop.png
+├─ preview-mobile.png
+└─ products-section.png
+
+
+## 🗂️ JSON exemplo
+```json
+{
+  "fornecedor": {
+    "razaoSocial": "Exemplo Ltda",
+    "nomeFantasia": "Fornecedor Exemplo",
+    "cnpj": "12345678000199",
+    "inscricaoEstadual": "123456789",
+    "inscricaoMunicipal": "1234567",
+    "endereco": {
+      "cep": "42702-903",
+      "logradouro": "Rua Exemplo",
+      "numero": "123",
+      "bairro": "Centro",
+      "municipio": "Salvador",
+      "uf": "BA",
+      "complemento": null
+    },
+    "contato": {
+      "nome": "Fulano",
+      "telefone": "71999999999",
+      "email": "fulano@exemplo.com"
+    }
+  },
+  "produtos": [
+    {
+      "descricao": "Produto A",
+      "unidade": "UN",
+      "quantidade": 10,
+      "valorUnitario": 5.5,
+      "valorTotal": 55
+    }
+  ],
+  "anexos": [
+    {
+      "nome": "documento.pdf",
+      "mime": "application/pdf",
+      "tamanho": 12345,
+      "base64": "data:application/pdf;base64,JVBERi0xLjQK..."
+    }
+  ]
+}
+
+::contentReference[oaicite:0]{index=0}
