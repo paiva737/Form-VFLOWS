@@ -87,15 +87,16 @@ $(function () {
   const ATT_KEY='vflows_anexos'
   function getAnexos(){const r=sessionStorage.getItem(ATT_KEY);return r?JSON.parse(r):[]}
   function setAnexos(a){sessionStorage.setItem(ATT_KEY,JSON.stringify(a))}
- function rowHTML(a){
+function rowHTML(a){
   return '<div class="attachment-row" data-id="'+a.id+'">'+
     '<div class="attachment-actions">'+
       '<button type="button" class="btn btn-danger btn-xs attachment-btn" data-act="del"><i class="fluigicon fluigicon-trash"></i></button>'+
-      '<button type="button" class="btn btn-info btn-xs attachment-btn" data-act="view"><i class="fa-solid fa-eye"></i></button>'+
+      '<button type="button" class="btn btn-info btn-xs attachment-btn" data-act="view"><i class="fluigicon fluigicon-eye-open"></i></button>'+
     '</div>'+
     '<div class="attachment-name">'+a.nome+'</div>'+
   '</div>';
 }
+
 
 
   function renderAnexos(){
