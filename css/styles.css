@@ -120,8 +120,8 @@ body { background: #fff; }
 
 .product-trash {
   position: absolute;
-   left: -52px;
-  top: 42%;
+  left: -54px;
+  top: 50%;
   transform: translateY(-50%);
   width: 40px;
   height: 40px;
@@ -156,25 +156,29 @@ body { background: #fff; }
   opacity: .95;
 }
 
-.select-caret { position: relative; }
-.select-caret select { padding-right: 48px; }
+/* Ajuste da seta branca no select */
+.select-caret { 
+  position: relative; 
+}
+.select-caret select { 
+  padding-right: 48px; 
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}
 .select-caret::after {
   content: "";
   position: absolute;
-  right: 0; top: 0; bottom: 0;
+  right: 0; 
+  top: 0; 
+  bottom: 0;
   width: 42px;
   background: #333;
   border-radius: 0 6px 6px 0;
-}
-.select-caret::before {
-  content: "▾";
-  position: absolute;
-  right: 14px;
-  top: 50%;
-  transform: translateY(-50%);
-  color: #fff;
-  font-size: 15px;
-  pointer-events: none;
+  background-image: url("data:image/svg+xml;utf8,<svg fill='white' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/></svg>");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 30px 30px;
 }
 
 .vt[readonly] {
