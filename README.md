@@ -57,15 +57,15 @@ Formulário para cadastro de **Fornecedor**, **Produtos** e **Anexos** com:
 
 ## 📁 Estrutura
 
-├─ index.html
-├─ css/
-│ └─ styles.css
-├─ js/
-│ └─ app.js
-└─ docs/
-├─ preview-desktop.png
-├─ preview-mobile.png
-└─ products-section.png
+├─ index.html<br>
+├─ css/<br>
+│ └─ styles.css<br>
+├─ js/<br>
+│ └─ app.js<br>
+└─ docs/<br>
+├─ preview-desktop.png<br>
+├─ preview-mobile.png<br>
+└─ products-section.png<br>
 
 
 ## 🗂️ JSON exemplo
@@ -111,4 +111,4 @@ Formulário para cadastro de **Fornecedor**, **Produtos** e **Anexos** com:
   ]
 }
 
-::contentReference[oaicite:0]{index=0}
+
