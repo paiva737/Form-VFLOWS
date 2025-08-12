@@ -7,7 +7,6 @@
   <a href="#-projeto">Projeto</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
   <a href="#-como-executar">Como executar</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
   <a href="#-como-usar">Como usar</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-  <a href="#-estrutura">Estrutura</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
   <a href="#-json-exemplo">JSON exemplo</a>
 </p>
 
@@ -42,8 +41,7 @@ Formulário para cadastro de **Fornecedor**, **Produtos** e **Anexos** com:
 ## ▶️ Como executar
 - **Rápido:** abra `index.html` direto no navegador.  
 - **Recomendado (servidor local):**
-  - Python: `python -m http.server 5500` → acesse `http://localhost:5500`
-  - Ou VS Code *Live Server* / `npx http-server -p 5500`
+  - VS Code *Live Server* / `npx http-server -p 5500`
 
 > Com servidor local, a busca de CEP e o download do JSON funcionam de forma mais consistente.
 
@@ -53,7 +51,7 @@ Formulário para cadastro de **Fornecedor**, **Produtos** e **Anexos** com:
 3. **Anexos:** use **Incluir Anexo**. “Visualizar” baixa o arquivo; “Excluir” remove da lista.  
 4. **Salvar Fornecedor:** valida tudo, exibe loading e **baixa o JSON** (também aparece no console).
 
-> O desafio permite **baixar**  o JSON no console.
+> O desafio permite **baixar** o JSON no console.
 
 
 ## 🗂️ JSON exemplo
@@ -99,5 +97,5 @@ Formulário para cadastro de **Fornecedor**, **Produtos** e **Anexos** com:
   ]
 }
 
-Feito com ♥ by Rafael Paiva :wave:
+
 
