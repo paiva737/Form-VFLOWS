@@ -193,3 +193,19 @@ body { background: #fff; }
   padding-left: 72px;
   padding-right: 16px;
 }
+
+.product-box-icon{
+  display:inline-block;
+  width:46px;
+  height:46px;
+  background-repeat:no-repeat;
+  background-position:center;
+  background-size:46px 46px;
+  background-image:url("data:image/svg+xml;utf8,\
+<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48' fill='none' stroke='white' stroke-width='2.8' stroke-linecap='round' stroke-linejoin='round'>\
+<path d='M6 16l18 6 18-6'/>\
+<path d='M6 16l8-8h20l8 8'/>\
+<path d='M42 16v18a4 4 0 0 1-4 4H10a4 4 0 0 1-4-4V16'/>\
+<path d='M24 22v16'/>\
+</svg>");
+}
