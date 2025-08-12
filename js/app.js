@@ -1,11 +1,31 @@
 $(function () {
-  function onlyDigits(s){return s.replace(/\D/g,'')}
+  function onlyDigits(s){return (s||'').toString().replace(/\D/g,'')}
   function formatCEP(d){return d.replace(/(\d{5})(\d{3})/,'$1-$2')}
+  function toFixed2(v){const n=parseFloat(v||0);return isNaN(n)?'0.00':n.toFixed(2)}
 
-  $('#cep').on('input',function(){
-    this.value = onlyDigits(this.value).slice(0,8)
-  })
+  function maskCNPJ(v){
+    v = onlyDigits(v).slice(0,14)
+    v = v.replace(/^(\d{2})(\d)/,'$1.$2')
+    v = v.replace(/^(\d{2})\.(\d{3})(\d)/,'$1.$2.$3')
+    v = v.replace(/^(\d{2})\.(\d{3})\.(\d{3})(\d)/,'$1.$2.$3/$4')
+    v = v.replace(/^(\d{2})\.(\d{3})\.(\d{3})\/(\d{4})(\d)/,'$1.$2.$3/$4-$5')
+    return v
+  }
+  function maskPhone(v){
+    v = onlyDigits(v).slice(0,11)
+    if(v.length>10) return v.replace(/^(\d{2})(\d{5})(\d{0,4}).*/,'($1) $2-$3')
+    if(v.length>6)  return v.replace(/^(\d{2})(\d{4})(\d{0,4}).*/,'($1) $2-$3')
+    if(v.length>2)  return v.replace(/^(\d{2})(\d+)/,'($1) $2')
+    return v
+  }
 
+  $('#cnpj').on('input',function(){ this.value = maskCNPJ(this.value) })
+  $('#telefone').on('input',function(){ this.value = maskPhone(this.value) })
+  $('#numero').on('input',function(){ this.value = onlyDigits(this.value).slice(0,6) })
+  $('#ie').on('input',function(){ this.value = onlyDigits(this.value).slice(0,14) })
+  $('#im').on('input',function(){ this.value = onlyDigits(this.value).slice(0,14) })
+
+  $('#cep').on('input',function(){ this.value = onlyDigits(this.value).slice(0,8) })
   $('#cep').on('blur',function(){
     const cep = onlyDigits(this.value)
     if(cep.length!==8) return
@@ -22,16 +42,47 @@ $(function () {
   })
 
   function recalc($item){
-    const q = parseFloat($item.find('.qtd').val()||'0')
-    const v = parseFloat($item.find('.vu').val()||'0')
+    const q = parseFloat($item.find('.qtd').val()||'0')||0
+    const v = parseFloat($item.find('.vu').val()||'0')||0
     $item.find('.vt').val((q*v).toFixed(2))
   }
-
+  function sanitizeNum(v){
+    v=(v||'').toString().replace(',','.').replace(/[^0-9.]/g,'')
+    const p=v.indexOf('.'); if(p!==-1) v=v.slice(0,p+1)+v.slice(p+1).replace(/\./g,'')
+    if(v.startsWith('.')) v='0'+v
+    return v
+  }
   $(document).on('input','.product-item .qtd, .product-item .vu',function(){
+    this.value = sanitizeNum(this.value)
     recalc($(this).closest('.product-item'))
   })
-
+  $(document).on('blur','.product-item .qtd, .product-item .vu',function(){
+    const n = Math.max(0, parseFloat(this.value||'0')||0)
+    this.value = toFixed2(n)
+    recalc($(this).closest('.product-item'))
+  })
   $('.product-item').each(function(){ recalc($(this)) })
+
+  function renumerar(){
+    $('.product-item').each(function(i){
+      $(this).find('.product-item__header').text('Produto - ' + (i+1))
+    })
+  }
+  $('.product-add').on('click',function(){
+    const $body = $(this).closest('.panel-block__body')
+    const $ref = $body.find('.product-item').first()
+    const $novo = $ref.clone(true, true)
+    $novo.find('input').val('')
+    $novo.find('select').prop('selectedIndex',0)
+    $novo.find('.vt').val('0.00')
+    $novo.insertBefore($(this))
+    renumerar()
+  })
+  $(document).on('click','.product-item .btn-danger',function(){
+    if($('.product-item').length<=1) return
+    $(this).closest('.product-item').remove()
+    renumerar()
+  })
 
   const ATT_KEY='vflows_anexos'
   function getAnexos(){const r=sessionStorage.getItem(ATT_KEY);return r?JSON.parse(r):[]}
@@ -57,7 +108,6 @@ $(function () {
       r.readAsDataURL(file)
     })
   }
-
   $('.attachments-add').on('click',function(){ $('#attachInput').click() })
   $('#attachInput').on('change',function(e){
     const files=Array.from(e.target.files||[])
@@ -97,14 +147,13 @@ $(function () {
       out.push({
         descricao:($p.find('.desc').val()||'').trim(),
         unidade:($p.find('.un').val()||'').trim(),
-        quantidade:Number($p.find('.qtd').val()||0),
-        valorUnitario:Number($p.find('.vu').val()||0),
-        valorTotal:Number($p.find('.vt').val()||0)
+        quantidade:parseFloat($p.find('.qtd').val()||0)||0,
+        valorUnitario:parseFloat($p.find('.vu').val()||0)||0,
+        valorTotal:parseFloat($p.find('.vt').val()||0)||0
       })
     })
     return out
   }
-
   function baixarJSON(obj,nome){
     const blob=new Blob([JSON.stringify(obj,null,2)],{type:'application/json;charset=utf-8'})
     const url=URL.createObjectURL(blob)
@@ -128,13 +177,14 @@ $(function () {
       fornecedor:{
         razaoSocial:$('#razaoSocial').val().trim(),
         nomeFantasia:$('#nomeFantasia').val().trim(),
-        cnpj:$('#cnpj').val().trim(),
-        inscricaoEstadual:$('#ie').val().trim()||null,
-        inscricaoMunicipal:$('#im').val().trim()||null,
+        cnpj:onlyDigits($('#cnpj').val().trim()),
+        inscricaoEstadual:onlyDigits($('#ie').val().trim())||null,
+        inscricaoMunicipal:onlyDigits($('#im').val().trim())||null,
+
         endereco:{
           cep:$('#cep').val().trim(),
           logradouro:$('#logradouro').val().trim(),
-          numero:$('#numero').val().trim(),
+          numero:onlyDigits($('#numero').val().trim()),
           bairro:$('#bairro').val().trim(),
           municipio:$('#municipio').val().trim(),
           uf:$('#uf').val().trim(),
@@ -142,7 +192,7 @@ $(function () {
         },
         contato:{
           nome:$('#contato').val().trim(),
-          telefone:$('#telefone').val().trim(),
+          telefone:onlyDigits($('#telefone').val().trim()),
           email:$('#email').val().trim()
         }
       },
