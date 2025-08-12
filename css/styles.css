@@ -234,5 +234,74 @@ body { background: #fff; }
 <path d='M24 22v16'/>\
 </svg>");
 }
-.attachment-actions .btn i { font-size: 12px; line-height: 1; }
+.attachment-actions .btn i { font-size: 12px; line-height: 1; } 
+
+/* ===== Responsivo dos cards de produto ===== */
+
+/* Até 768px: empilha ícone e campos, reduz paddings e ajusta lixeira */
+@media (max-width: 768px) {
+  /* corpo da seção de produtos com padding menor */
+  .panel-products .panel-block__body {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+
+  /* força as duas colunas (ícone e campos) a ficarem uma abaixo da outra */
+  .product-item .row > .col-xs-2,
+  .product-item .row > .col-xs-10 {
+    float: none !important;
+    width: 100% !important;
+  }
+
+  /* ícone menor e com margem abaixo */
+  .product-icon {
+    width: 64px;
+    height: 64px;
+    margin: 0 0 12px 0;
+  }
+  .product-icon .fluigicon {
+    font-size: 30px;
+  }
+
+  /* botão lixeira para dentro do card em telas pequenas */
+  .product-trash {
+    left: 8px;
+    top: 8px;
+    transform: none;
+    width: 32px;
+    height: 32px;
+  }
+}
+
+/* Até 480px: um pouco mais compacto */
+@media (max-width: 480px) {
+  .product-icon {
+    width: 56px;
+    height: 56px;
+  }
+  .product-icon .fluigicon {
+    font-size: 26px;
+  }
+}
+
+
+/* Mobile: posiciona a lixeira no topo-direito e evita sobreposição com o título */
+@media (max-width: 768px) {
+  .product-trash {
+    position: absolute;
+    right: 8px;      /* fica à direita */
+    left: auto;      /* cancela o left anterior */
+    top: 8px;
+    transform: none;
+    width: 32px;
+    height: 32px;
+    z-index: 3;
+  }
+
+  /* dá espaço no cabeçalho para a lixeira não cobrir o texto/linha */
+  .product-item__header {
+    padding-right: 48px;
+  }
+}
+
 
