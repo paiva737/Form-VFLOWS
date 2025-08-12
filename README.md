@@ -53,19 +53,7 @@ Formulário para cadastro de **Fornecedor**, **Produtos** e **Anexos** com:
 3. **Anexos:** use **Incluir Anexo**. “Visualizar” baixa o arquivo; “Excluir” remove da lista.  
 4. **Salvar Fornecedor:** valida tudo, exibe loading e **baixa o JSON** (também aparece no console).
 
-> O desafio permite **baixar** ou **apenas exibir** o JSON no console.
-
-## 📁 Estrutura
-
-├─ index.html<br>
-├─ css/<br>
-│ └─ styles.css<br>
-├─ js/<br>
-│ └─ app.js<br>
-└─ docs/<br>
-├─ preview-desktop.png<br>
-├─ preview-mobile.png<br>
-└─ products-section.png<br>
+> O desafio permite **baixar**  o JSON no console.
 
 
 ## 🗂️ JSON exemplo
@@ -111,4 +99,5 @@ Formulário para cadastro de **Fornecedor**, **Produtos** e **Anexos** com:
   ]
 }
 
+Feito com ♥ by Rafael Paiva :wave:
 
