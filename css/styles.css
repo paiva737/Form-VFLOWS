@@ -173,6 +173,7 @@ body { background: #fff; }
   top: 0; 
   bottom: 0;
   width: 42px;
+  pointer-events: none;
   background: #333;
   border-radius: 0 6px 6px 0;
   background-image: url("data:image/svg+xml;utf8,<svg fill='white' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/></svg>");
