@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <title>CADASTRO FORNECEDOR/PRODUTO</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://fluig.totvs.com/style-guide/css/fluig-style-guide.min.css">
   <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
@@ -100,24 +100,24 @@
         </div>
       </section>
 
-      <section class="panel-block">
+      <section class="panel-block panel-products">
         <div class="panel-block__bar">Produtos</div>
         <div class="panel-block__body">
 
+          <!-- Produto 1 -->
           <div class="product-item">
+            <button type="button" class="product-trash btn btn-danger btn-xs">
+              <i class="fluigicon fluigicon-trash"></i>
+            </button>
+
             <div class="product-item__header">Produto - 1</div>
             <div class="row">
-              <div class="col-xs-1 text-center">
-                <button type="button" class="btn btn-danger btn-xs">
-                  <span class="glyphicon glyphicon-trash"></span>
-                </button>
-              </div>
               <div class="col-xs-2 text-center">
                 <div class="product-icon">
-                  <span class="glyphicon glyphicon-th-large"></span>
+                  <i class="fluigicon fluigicon-apps"></i>
                 </div>
               </div>
-              <div class="col-xs-9">
+              <div class="col-xs-10">
                 <div class="form-group">
                   <label>Produto</label>
                   <input type="text" class="form-control desc">
@@ -125,12 +125,14 @@
                 <div class="row">
                   <div class="col-sm-3 form-group">
                     <label>UND. Medida</label>
-                    <select class="form-control un">
-                      <option>UN</option>
-                      <option>CX</option>
-                      <option>KG</option>
-                      <option>PC</option>
-                    </select>
+                    <div class="select-caret">
+                      <select class="form-control un">
+                        <option>UN</option>
+                        <option>CX</option>
+                        <option>KG</option>
+                        <option>PC</option>
+                      </select>
+                    </div>
                   </div>
                   <div class="col-sm-3 form-group">
                     <label>QTDTE. em Estoque</label>
@@ -149,20 +151,20 @@
             </div>
           </div>
 
+          <!-- Produto 2 -->
           <div class="product-item">
+            <button type="button" class="product-trash btn btn-danger btn-xs">
+              <i class="fluigicon fluigicon-trash"></i>
+            </button>
+
             <div class="product-item__header">Produto - 2</div>
             <div class="row">
-              <div class="col-xs-1 text-center">
-                <button type="button" class="btn btn-danger btn-xs">
-                  <span class="glyphicon glyphicon-trash"></span>
-                </button>
-              </div>
               <div class="col-xs-2 text-center">
                 <div class="product-icon">
-                  <span class="glyphicon glyphicon-th-large"></span>
+                  <i class="fluigicon fluigicon-apps"></i>
                 </div>
               </div>
-              <div class="col-xs-9">
+              <div class="col-xs-10">
                 <div class="form-group">
                   <label>Produto</label>
                   <input type="text" class="form-control desc">
@@ -170,12 +172,14 @@
                 <div class="row">
                   <div class="col-sm-3 form-group">
                     <label>UND. Medida</label>
-                    <select class="form-control un">
-                      <option>UN</option>
-                      <option>CX</option>
-                      <option>KG</option>
-                      <option>PC</option>
-                    </select>
+                    <div class="select-caret">
+                      <select class="form-control un">
+                        <option>UN</option>
+                        <option>CX</option>
+                        <option>KG</option>
+                        <option>PC</option>
+                      </select>
+                    </div>
                   </div>
                   <div class="col-sm-3 form-group">
                     <label>QTDTE. em Estoque</label>

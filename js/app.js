@@ -41,16 +41,16 @@ $(function () {
     })
   })
 
-  function recalc($item){
-    const q = parseFloat($item.find('.qtd').val()||'0')||0
-    const v = parseFloat($item.find('.vu').val()||'0')||0
-    $item.find('.vt').val((q*v).toFixed(2))
-  }
   function sanitizeNum(v){
     v=(v||'').toString().replace(',','.').replace(/[^0-9.]/g,'')
     const p=v.indexOf('.'); if(p!==-1) v=v.slice(0,p+1)+v.slice(p+1).replace(/\./g,'')
     if(v.startsWith('.')) v='0'+v
     return v
+  }
+  function recalc($item){
+    const q = parseFloat($item.find('.qtd').val()||'0')||0
+    const v = parseFloat($item.find('.vu').val()||'0')||0
+    $item.find('.vt').val((q*v).toFixed(2))
   }
   $(document).on('input','.product-item .qtd, .product-item .vu',function(){
     this.value = sanitizeNum(this.value)
@@ -140,6 +140,36 @@ $(function () {
   })
   renderAnexos()
 
+  function validarProdutos(){
+    const $itens = $('.product-item')
+    if($itens.length===0) return {ok:false,msg:'Inclua ao menos 1 produto.'}
+
+    for(let i=0;i<$itens.length;i++){
+      const $p = $($itens[i])
+      const idx = i+1
+      const $desc = $p.find('.desc')
+      const $un   = $p.find('.un')
+      const $qtd  = $p.find('.qtd')
+      const $vu   = $p.find('.vu')
+
+      if(!$desc.val() || !$desc.val().trim()){
+        $desc.focus(); return {ok:false,msg:'Preencha a descrição do Produto - '+idx}
+      }
+      if(!$un.val()){
+        $un.focus(); return {ok:false,msg:'Selecione a unidade no Produto - '+idx}
+      }
+      const qtd = parseFloat($qtd.val()||'0')
+      if(!(qtd>0)){
+        $qtd.focus(); return {ok:false,msg:'Quantidade deve ser maior que 0 no Produto - '+idx}
+      }
+      const vu = parseFloat($vu.val()||'0')
+      if(!(vu>0)){
+        $vu.focus(); return {ok:false,msg:'Valor unitário deve ser maior que 0 no Produto - '+idx}
+      }
+    }
+    return {ok:true}
+  }
+
   function coletarProdutos(){
     const out=[]
     $('.product-item').each(function(){
@@ -154,6 +184,7 @@ $(function () {
     })
     return out
   }
+
   function baixarJSON(obj,nome){
     const blob=new Blob([JSON.stringify(obj,null,2)],{type:'application/json;charset=utf-8'})
     const url=URL.createObjectURL(blob)
@@ -168,11 +199,16 @@ $(function () {
 
   $('.save-form').on('click',function(){
     const temAnexo=getAnexos().length>0
-    const produtos=coletarProdutos()
-    const temProduto=produtos.length>0
+    if(!temAnexo){alert('Inclua ao menos 1 anexo.');return}
+
+    const vp = validarProdutos()
+    if(!vp.ok){ alert(vp.msg); return }
+
     const formOK=document.getElementById('form-fornecedor').checkValidity()
-    if(!formOK||!temProduto||!temAnexo){alert('Preencha os obrigatórios, inclua ao menos 1 produto e 1 anexo.');return}
+    if(!formOK){ document.getElementById('form-fornecedor').reportValidity(); return }
+
     $('#modalLoading').modal('show')
+
     const payload={
       fornecedor:{
         razaoSocial:$('#razaoSocial').val().trim(),
@@ -180,7 +216,6 @@ $(function () {
         cnpj:onlyDigits($('#cnpj').val().trim()),
         inscricaoEstadual:onlyDigits($('#ie').val().trim())||null,
         inscricaoMunicipal:onlyDigits($('#im').val().trim())||null,
-
         endereco:{
           cep:$('#cep').val().trim(),
           logradouro:$('#logradouro').val().trim(),
@@ -196,14 +231,16 @@ $(function () {
           email:$('#email').val().trim()
         }
       },
-      produtos:produtos,
+      produtos:coletarProdutos(),
       anexos:getAnexos().map(a=>({nome:a.nome,mime:a.mime,tamanho:a.tamanho,base64:a.dataUrl}))
     }
+
     setTimeout(function(){
       console.log('JSON DE ENVIO:',payload)
       baixarJSON(payload,'fornecedor_'+Date.now()+'.json')
       $('#modalLoading').modal('hide')
       alert('Dados preparados com sucesso.')
-    },800)
+    },700)
   })
 })
+

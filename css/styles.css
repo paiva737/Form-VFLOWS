@@ -2,6 +2,7 @@
 body { background: #fff; }
 
 .form-title { margin: 20px 0; font-weight: 600; }
+
 .panel-block {
   border: 2px solid #cfcfcf;
   border-radius: 10px;
@@ -14,23 +15,24 @@ body { background: #fff; }
   font-weight: 600;
   padding: 10px 14px;
 }
-.panel-block__body {
-  padding: 16px;
-}
+.panel-block__body { padding: 16px; }
+
 .form-group label { font-weight: 600; }
 .form-control { border-radius: 8px; height: 38px; }
 
 .product-item {
   border: 2px solid #cfcfcf;
   border-radius: 10px;
-  padding: 12px;
+  padding: 20px;
   margin-bottom: 16px;
   background: #fff;
+  position: relative;
 }
 .product-item__header {
   font-weight: 600;
   margin-bottom: 8px;
 }
+
 .product-icon {
   width: 72px;
   height: 72px;
@@ -40,14 +42,42 @@ body { background: #fff; }
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 26px;
   margin: 4px auto 12px;
 }
+.product-icon .fluigicon {
+  font-size: 26px;
+  line-height: 1;
+  color: #5b85a6;
+}
+
 .vt[readonly] {
-  background: #d9d9d9;
+  background: #d9d9d9 !important;
   cursor: not-allowed;
 }
-.product-add {
+
+.attachments-box {
+  border: 2px solid #cfcfcf;
+  border-radius: 10px;
+  padding: 12px;
+  background: #fff;
+  margin-bottom: 16px;
+}
+.attachments-header { font-weight: 600; margin-bottom: 8px; }
+.attachment-row {
+  display: flex;
+  align-items: center;
+  border: 2px solid #e5e5e5;
+  border-radius: 8px;
+  padding: 10px;
+  margin-bottom: 10px;
+  background: #fff;
+}
+.attachment-actions { display: flex; gap: 8px; margin-right: 12px; }
+.attachment-name { flex: 1; line-height: 22px; }
+
+.product-add,
+.attachments-add,
+.save-form {
   border-radius: 8px;
   font-weight: 600;
 }
@@ -60,38 +90,102 @@ body { background: #fff; }
   border-color: #187f31;
 }
 
+.btn-xs .fluigicon { font-size: 12px; }
 
-.attachments-box {
-  border: 2px solid #cfcfcf;
+.panel-block__bar { font-size: 16px; }
+.form-control { height: 44px; }
+
+.product-item {
+  position: relative;
+  border: 2px solid #c9cdcf;
   border-radius: 10px;
-  padding: 12px;
-  background: #fff;
-  margin-bottom: 16px;
+  padding: 22px 20px 20px 20px;
 }
-.attachments-header {
-  font-weight: 600;
-  margin-bottom: 8px;
-}
-.attachment-row {
+
+.product-item__header {
   display: flex;
   align-items: center;
-  border: 2px solid #e5e5e5;
-  border-radius: 8px;
-  padding: 10px;
-  margin-bottom: 10px;
-  background: #fff;
+  gap: 10px;
+  margin: 2px 0 14px 0;
+  font-weight: 700;
+  color: #3e3f42;
 }
-.attachment-actions {
-  display: flex;
-  gap: 8px;
-  margin-right: 12px;
-}
-.attachment-name {
+.product-item__header::after {
+  content: "";
   flex: 1;
-  line-height: 22px;
+  height: 1px;
+  background: #98a3ad;
+  margin-left: 8px;
 }
-.attachments-add,
-.save-form {
-  border-radius: 8px;
-  font-weight: 600;
+
+.product-trash {
+  position: absolute;
+   left: -52px;
+  top: 42%;
+  transform: translateY(-50%);
+  width: 40px;
+  height: 40px;
+  border: 0;
+  border-radius: 6px;
+  background: #e53935;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 1px 2px rgba(0,0,0,.18);
+  z-index: 2;
+}
+.product-trash .fluigicon {
+  font-size: 18px;
+}
+
+.product-icon {
+  width: 92px;
+  height: 92px;
+  border-radius: 50%;
+  border: 3px solid #cfd6f4;
+  background: #8ea0d9;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 6px auto 14px;
+}
+.product-icon .fluigicon {
+  font-size: 30px;
+  color: #fff;
+  opacity: .95;
+}
+
+.select-caret { position: relative; }
+.select-caret select { padding-right: 48px; }
+.select-caret::after {
+  content: "";
+  position: absolute;
+  right: 0; top: 0; bottom: 0;
+  width: 42px;
+  background: #333;
+  border-radius: 0 6px 6px 0;
+}
+.select-caret::before {
+  content: "▾";
+  position: absolute;
+  right: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #fff;
+  font-size: 15px;
+  pointer-events: none;
+}
+
+.vt[readonly] {
+  background: #b7bcb5 !important;
+  color: #2b2b2b;
+}
+
+.btn-success { background: #1a9a3a; border-color: #168a33; }
+.btn-success:hover { background: #178c35; border-color: #137c2f; }
+
+.panel-products .panel-block__body {
+  padding-left: 72px;
+  padding-right: 16px;
 }
