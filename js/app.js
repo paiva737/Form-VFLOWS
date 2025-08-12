@@ -87,15 +87,17 @@ $(function () {
   const ATT_KEY='vflows_anexos'
   function getAnexos(){const r=sessionStorage.getItem(ATT_KEY);return r?JSON.parse(r):[]}
   function setAnexos(a){sessionStorage.setItem(ATT_KEY,JSON.stringify(a))}
-  function rowHTML(a){
-    return '<div class="attachment-row" data-id="'+a.id+'">'+
-      '<div class="attachment-actions">'+
-      '<button type="button" class="btn btn-danger btn-xs attachment-btn" data-act="del"><span class="glyphicon glyphicon-trash"></span></button>'+
-      '<button type="button" class="btn btn-info btn-xs attachment-btn" data-act="view"><span class="glyphicon glyphicon-eye-open"></span></button>'+
-      '</div>'+
-      '<div class="attachment-name">'+a.nome+'</div>'+
-      '</div>'
-  }
+ function rowHTML(a){
+  return '<div class="attachment-row" data-id="'+a.id+'">'+
+    '<div class="attachment-actions">'+
+      '<button type="button" class="btn btn-danger btn-xs attachment-btn" data-act="del"><i class="fluigicon fluigicon-trash"></i></button>'+
+      '<button type="button" class="btn btn-info btn-xs attachment-btn" data-act="view"><i class="fa-solid fa-eye"></i></button>'+
+    '</div>'+
+    '<div class="attachment-name">'+a.nome+'</div>'+
+  '</div>';
+}
+
+
   function renderAnexos(){
     const items=getAnexos()
     $('#attachmentsList').html(items.map(rowHTML).join(''))

@@ -209,3 +209,4 @@ body { background: #fff; }
 <path d='M24 22v16'/>\
 </svg>");
 }
+.attachment-actions .btn i { font-size: 12px; line-height: 1; }
